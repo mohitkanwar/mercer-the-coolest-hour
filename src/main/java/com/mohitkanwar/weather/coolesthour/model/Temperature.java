@@ -5,7 +5,7 @@ public class Temperature implements Comparable<Temperature> {
     private TemperatureUnit unit;
 
     public Temperature() {
-        this.unit = TemperatureUnit.CELCIUS;
+        this.unit = TemperatureUnit.CELSIUS;
     }
 
     public Temperature(TemperatureUnit unit) {

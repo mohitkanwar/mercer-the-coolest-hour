@@ -1,10 +1,9 @@
 package com.mohitkanwar.weather.coolesthour;
 
-import com.mohitkanwar.weather.coolesthour.exceptions.InvalidNumberOfArgumentsExcpetion;
 import com.mohitkanwar.weather.coolesthour.integrations.response.model.GeoPosition;
 import com.mohitkanwar.weather.coolesthour.model.Temperature;
-import com.mohitkanwar.weather.coolesthour.service.TemperatureOutputService;
 import com.mohitkanwar.weather.coolesthour.service.TemperatureForecastService;
+import com.mohitkanwar.weather.coolesthour.service.TemperatureOutputService;
 import com.mohitkanwar.weather.coolesthour.service.ZipCodeDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +22,8 @@ public class CoolestHourApplication implements CommandLineRunner {
     private final TemperatureOutputService temperatureOutputService;
     private final ZipCodeDetailsService zipCodeDetailsService;
     @Value("${default.zipcode}")
-    private  String defaultZipcode;
+    private String defaultZipcode;
+
     @Autowired
     public CoolestHourApplication(TemperatureForecastService temperatureForecastService, TemperatureOutputService temperatureOutputService, ZipCodeDetailsService zipCodeDetailsService) {
         this.temperatureForecastService = temperatureForecastService;
@@ -41,7 +41,7 @@ public class CoolestHourApplication implements CommandLineRunner {
         String zipcode;
         if (args.length < 1) {
             zipcode = defaultZipcode;
-        }else {
+        } else {
 
             zipcode = args[0];
         }

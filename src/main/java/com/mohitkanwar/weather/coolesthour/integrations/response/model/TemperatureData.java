@@ -4,6 +4,11 @@ public class TemperatureData {
     private long time;
     private double temperature;
 
+    public TemperatureData(long time, double temperature) {
+        this.time = time;
+        this.temperature = temperature;
+    }
+
     public long getTime() {
         return time;
     }
@@ -14,11 +19,6 @@ public class TemperatureData {
 
     public double getTemperature() {
         return temperature;
-    }
-
-    public TemperatureData(long time, double temperature) {
-        this.time = time;
-        this.temperature = temperature;
     }
 
     public void setTemperature(double temperature) {
