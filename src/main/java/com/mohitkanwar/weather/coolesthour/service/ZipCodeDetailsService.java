@@ -1,7 +1,7 @@
 package com.mohitkanwar.weather.coolesthour.service;
 
-import com.mohitkanwar.weather.coolesthour.integrations.response.model.GeoPosition;
+import com.mohitkanwar.weather.coolesthour.model.Location;
 
 public interface ZipCodeDetailsService {
-    GeoPosition getLocationFromZipCode(String zipcode);
+    Location getLocationFromZipCode(String zipcode);
 }

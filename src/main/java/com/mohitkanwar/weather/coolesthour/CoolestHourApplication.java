@@ -1,9 +1,9 @@
 package com.mohitkanwar.weather.coolesthour;
 
-import com.mohitkanwar.weather.coolesthour.integrations.response.model.GeoPosition;
-import com.mohitkanwar.weather.coolesthour.model.Temperature;
+import com.mohitkanwar.weather.coolesthour.model.Location;
+import com.mohitkanwar.weather.coolesthour.model.TemperatureAtTime;
 import com.mohitkanwar.weather.coolesthour.service.TemperatureForecastService;
-import com.mohitkanwar.weather.coolesthour.service.TemperatureOutputService;
+import com.mohitkanwar.weather.coolesthour.service.TemperatureReportingService;
 import com.mohitkanwar.weather.coolesthour.service.ZipCodeDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,19 +15,29 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * This application returns tomorrow's(according to system's date) hourly temperatures,
+ * with coolest temperature highlighted.
+ * <p>
+ * It accepts a valid U.S zip code as an input. If not provided,
+ * it reads the default zip code from application.properties.
+ *
+ * If multiple arguments are provided, it will accept only the first one, and ignore rest.
+ * </p>
+ */
 @SpringBootApplication
 public class CoolestHourApplication implements CommandLineRunner {
 
     private final TemperatureForecastService temperatureForecastService;
-    private final TemperatureOutputService temperatureOutputService;
+    private final TemperatureReportingService temperatureReportingService;
     private final ZipCodeDetailsService zipCodeDetailsService;
     @Value("${default.zipcode}")
     private String defaultZipcode;
 
     @Autowired
-    public CoolestHourApplication(TemperatureForecastService temperatureForecastService, TemperatureOutputService temperatureOutputService, ZipCodeDetailsService zipCodeDetailsService) {
+    public CoolestHourApplication(TemperatureForecastService temperatureForecastService, TemperatureReportingService temperatureReportingService, ZipCodeDetailsService zipCodeDetailsService) {
         this.temperatureForecastService = temperatureForecastService;
-        this.temperatureOutputService = temperatureOutputService;
+        this.temperatureReportingService = temperatureReportingService;
         this.zipCodeDetailsService = zipCodeDetailsService;
     }
 
@@ -42,15 +52,14 @@ public class CoolestHourApplication implements CommandLineRunner {
         if (args.length < 1) {
             zipcode = defaultZipcode;
         } else {
-
             zipcode = args[0];
         }
         LocalDate tomorrow = LocalDate.from(LocalDate.now()).plusDays(1);
         try {
-            GeoPosition geoPosition = zipCodeDetailsService.getLocationFromZipCode(zipcode);
-            System.out.println("Checking the coolest weather for " + tomorrow.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")) + " at " + zipcode);
-            List<Temperature> temperatures = temperatureForecastService.getTemperatureForeCastForGeoPosition(geoPosition);
-            temperatureOutputService.printTemperatures(temperatures);
+            Location location = zipCodeDetailsService.getLocationFromZipCode(zipcode);
+            System.out.println("Checking the weather for " + tomorrow.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")) + " at " + zipcode + "(" + location.getName() + ")");
+            List<TemperatureAtTime> temperatures = temperatureForecastService.getTemperatureForeCastForGeoPosition(location);
+            temperatureReportingService.printTemperatures(temperatures);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }

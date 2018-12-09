@@ -5,7 +5,7 @@ public class LocationDetails {
     private String PrimaryPostalCode;
     private Country Country;
     private GeoPosition GeoPosition;
-
+    private String EnglishName;
 
     public String getPrimaryPostalCode() {
         return PrimaryPostalCode;
@@ -15,19 +15,27 @@ public class LocationDetails {
         PrimaryPostalCode = primaryPostalCode;
     }
 
-    public com.mohitkanwar.weather.coolesthour.integrations.response.model.Country getCountry() {
+    public Country getCountry() {
         return Country;
     }
 
-    public void setCountry(com.mohitkanwar.weather.coolesthour.integrations.response.model.Country country) {
+    public void setCountry(Country country) {
         Country = country;
     }
 
-    public com.mohitkanwar.weather.coolesthour.integrations.response.model.GeoPosition getGeoPosition() {
+    public GeoPosition getGeoPosition() {
         return GeoPosition;
     }
 
-    public void setGeoPosition(com.mohitkanwar.weather.coolesthour.integrations.response.model.GeoPosition geoPosition) {
+    public void setGeoPosition(GeoPosition geoPosition) {
         GeoPosition = geoPosition;
+    }
+
+    public String getEnglishName() {
+        return EnglishName;
+    }
+
+    public void setEnglishName(String englishName) {
+        EnglishName = englishName;
     }
 }

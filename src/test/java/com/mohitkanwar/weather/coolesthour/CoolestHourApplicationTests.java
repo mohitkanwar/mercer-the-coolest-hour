@@ -2,13 +2,18 @@ package com.mohitkanwar.weather.coolesthour;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(JUnit4.class)
-@SpringBootTest({"94043"})
+@RunWith(SpringRunner.class)
+@SpringBootTest()
+@ContextConfiguration(classes = CoolestHourApplication.class,
+        initializers = ConfigFileApplicationContextInitializer.class)
+
 public class CoolestHourApplicationTests {
     @Autowired
     ApplicationContext ctx;
