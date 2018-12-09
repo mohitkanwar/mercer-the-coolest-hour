@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * This service reports the temperature in a given format.
- *
+ * <p>
  * This service also detects the coolest temperature of the day and highlights it during reporting
  */
 @Service

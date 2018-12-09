@@ -34,7 +34,6 @@ public class USZipCodeDetailsServiceImpl implements ZipCodeDetailsService {
     }
 
     /**
-     *
      * @param zipcode
      * @return
      */

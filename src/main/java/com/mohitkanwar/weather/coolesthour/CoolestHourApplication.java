@@ -21,7 +21,7 @@ import java.util.List;
  * <p>
  * It accepts a valid U.S zip code as an input. If not provided,
  * it reads the default zip code from application.properties.
- *
+ * <p>
  * If multiple arguments are provided, it will accept only the first one, and ignore rest.
  * </p>
  */
